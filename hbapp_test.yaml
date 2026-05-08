@@ -1,0 +1,47 @@
+appId: com.pozitron.hepsiburada
+
+---
+# Uygulamayı başlat
+- launchApp
+
+# Animasyonların bitmesini bekle
+- waitForAnimationToEnd
+
+# İlk görünür ürün kartına tıkla
+- tapOn:
+    id: "productBoxImage"
+    index: 1
+
+- waitForAnimationToEnd
+
+# Sepete ekle butonu görünene kadar kaydır
+- scrollUntilVisible:
+    element:
+      text: "Sepete ekle"
+
+# Ürünü sepete ekle
+- tapOn:
+    text: "Sepete ekle"
+
+- waitForAnimationToEnd
+
+# Mini sepetin açıldığını doğrula ve sepete git
+- assertVisible: "Sepete git"
+- tapOn:
+    text: "Sepete git"
+
+- waitForAnimationToEnd
+
+# SEPET DOĞRULAMALARI (Kritik Alan)
+- assertVisible: "Sepetim"
+- assertVisible: ".*TL"  # Ekranda herhangi bir fiyat formatı olduğunu doğrular
+- assertVisible: "Ödemeye Geç"
+
+# Ödeme adımına geç
+- tapOn: 
+    text: "Ödemeye Geç"
+
+# Üye olmadan devam et (Eğer ekran gelirse)
+- tapOn:
+    text: "Üye olmadan devam et"
+    optional: true
